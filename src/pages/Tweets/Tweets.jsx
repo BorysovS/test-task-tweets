@@ -14,6 +14,9 @@ const Tweets = () => {
             )
         }
         getFetchUsers();
+        setPage(pervstate => { 
+            pervstate += 1;
+        })
     }, [page])
     
     return (
