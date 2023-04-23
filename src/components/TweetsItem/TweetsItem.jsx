@@ -1,8 +1,41 @@
 import { Avatar, ImgItemWrapper, ItemBtn, ItemImg, ItemLink, ItemWrapper, ListItem, TextFollower, TextTweets } from "./TweetsItem.styled";
 import logo from '../../images/Logo.png'
+import { updUser } from "services/usepAPI";
+import { useEffect, useState } from "react";
 
 export const TweetsItem = ({ item }) => { 
-    console.log(logo);
+    const { tweets, followers, user, avatar, id } = item;
+
+    const [userFollowers, setUserFollowers] = useState(followers);
+    const [isFollow, setIsFollow] = useState(localStorage.getItem(`isFollow${user}-${id}`) === 'true');
+
+
+    const handleClick = userId => { 
+
+        if (id === userId && isFollow === false) {
+            setUserFollowers(prev => prev + 1)
+            setIsFollow(true)
+            localStorage.setItem(`isFollow${user}-${id}`, true)
+            return
+        }
+        setUserFollowers(prev => prev - 1)
+        setIsFollow(false)
+        localStorage.removeItem(`isFollow${user}-${id}`, false)
+    }
+
+    useEffect(() => {
+        const fetchUpdUser = async () => { 
+        await updUser(id, userFollowers);
+         if (userFollowers !== followers) { 
+         setUserFollowers(userFollowers);
+         }
+        }
+        fetchUpdUser()
+        setUserFollowers(userFollowers)
+        
+    }, [userFollowers, id, followers, isFollow ])
+    
+    
     return (
         <ListItem>
             <ItemLink href="https://goit.global/ua/">
@@ -10,11 +43,13 @@ export const TweetsItem = ({ item }) => {
             </ItemLink>
             <ItemWrapper>
                 <ImgItemWrapper>
-                    <Avatar src={item.avatar} alt="" />
+                    <Avatar src={avatar} alt="" />
                 </ImgItemWrapper>
-                <TextTweets>{item.tweets} tweets</TextTweets>
-                <TextFollower>{item.followers} followers</TextFollower>
-                <ItemBtn type="button">Follow</ItemBtn>
+                <TextTweets>{tweets} tweets</TextTweets>
+                <TextFollower>{userFollowers} followers</TextFollower>
+                <ItemBtn type="button" onClick={() => handleClick(id)} style={{backgroundColor: isFollow ? '#5CD3A8' : '#EBD8FF'}}>
+                    { isFollow ? 'following' : 'follow'}
+                </ItemBtn>
                 
             </ItemWrapper>
             
