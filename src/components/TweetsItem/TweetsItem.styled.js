@@ -115,8 +115,9 @@ export const TextFollower = styled.p`
 `;
 
 export const ItemBtn = styled.button`
+  width: 196px;
   background: #ebd8ff;
-  padding: 14px 59px;
+  padding: 14px 39px;
   border: 0px solid transparent;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

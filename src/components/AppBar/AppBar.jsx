@@ -5,7 +5,6 @@ export const AppBar = () => {
     return (
         <Header>
             <Navigation />
-            header
         </Header>
     )
 }

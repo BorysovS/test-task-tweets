@@ -1,7 +1,14 @@
 import { TweetsList } from 'components/TweetsList/TweetsList';
 import { useEffect, useState } from 'react';
 import { getUsers, updUser } from 'services/usepAPI';
-import { BackLinkBtn } from './Tweets.styled';
+import {
+  BackLinkBtn,
+  BtnLoadMore,
+  Container,
+  FilterThumb,
+  WrapperSelect,
+} from './Tweets.styled';
+import { animateScroll } from 'react-scroll';
 
 import useLocalStorage from 'hooks/useLocalStorage';
 import { filterUsers } from 'utils/filterUsers';
@@ -60,6 +67,15 @@ const Tweets = () => {
   //       setSelectedOption(selectedOption.value);
   //   };
 
+  const scrollOnMoreButton = () => {
+    animateScroll.scrollToBottom({
+      duration: 500,
+      offset: 20,
+      delay: 8,
+      smooth: 'linear',
+    });
+  };
+
   useEffect(() => {
     const fetchUsers = async () => {
       const newUsers = await getUsers(page);
@@ -71,14 +87,12 @@ const Tweets = () => {
 
       if (newUsers.length === 0) {
         setDisabled(true);
-        console.log(disabled);
       }
 
       setUsers(pervState => [...pervState, ...newUsers]);
     };
     fetchUsers();
   }, [page, disabled]);
-
 
   const updateUserFollowings = async (id, followers, subscription) => {
     setUsers(subs =>
@@ -103,26 +117,31 @@ const Tweets = () => {
 
   const handleLoadMore = () => {
     setPage(pervpage => pervpage + 1);
+    scrollOnMoreButton();
   };
 
   return (
-    <div>
-      <BackLinkBtn to="/">Back</BackLinkBtn>
+    <Container>
+      <FilterThumb>
+        <BackLinkBtn to="/">Go Back</BackLinkBtn>
 
-      <SelectFilterUsers
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
+        <WrapperSelect>
+          <SelectFilterUsers
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
+        </WrapperSelect>
+      </FilterThumb>
       <TweetsList
         items={filteredUsers}
         setUsers={setUsers}
         followings={followings}
         isFollowing={updateUserFollowings}
       />
-      <button type="button" onClick={handleLoadMore} disabled={disabled}>
+      <BtnLoadMore type="button" onClick={handleLoadMore} disabled={disabled}>
         Load More
-      </button>
-    </div>
+      </BtnLoadMore>
+    </Container>
   );
 };
 
