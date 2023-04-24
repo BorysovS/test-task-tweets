@@ -70,7 +70,6 @@ const Tweets = () => {
   const scrollOnMoreButton = () => {
     animateScroll.scrollToBottom({
       duration: 500,
-      offset: 20,
       delay: 8,
       smooth: 'linear',
     });
