@@ -20,52 +20,10 @@ const Tweets = () => {
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
   const [selectedOption, setSelectedOption] = useState(filterValues.all);
-
   const [followings, setFollowings] = useLocalStorage();
 
   let filteredUsers = filterUsers(users, followings, selectedOption.value);
 
-  //   const options = [
-  //     { value: 'all', label: 'All' },
-  //     { value: 'following', label: 'Following' },
-  //     { value: 'follow', label: 'Follow' },
-  //   ]
-
-  // const lsUsers = JSON.parse(localStorage.getItem('cardArray')) || [];
-
-  // const filteredUsers = users.filter((user) => {
-  // switch(selectedOption) {
-  //   case 'all':
-  //     return true;
-  //   case 'following':
-  //     return user.isFollow === true;
-  //   case 'follow':
-  //     return user.isFollow === false;
-  //   default:
-  //     return true;
-  // }
-  // });
-  //  const filteredUsers = users.filter((user) => {
-  //     switch (selectedOption) {
-  //       case 'all':
-  //         return true;
-  //       case 'following':
-  //         return user.isFollow === true;
-  //       case 'follow':
-  //         return user.isFollow === false;
-  //       default:
-  //         return true;
-  //     }}).map((user) => {
-  //     const lsUser = users.find((us) => us.id === user.id);
-  //     if (lsUser) {
-  //       return { ...user, isFollow: lsUser.isFollow };
-  //     }
-  //     return user;
-  //   });
-
-  //     const handleChange = selectedOption => {
-  //       setSelectedOption(selectedOption.value);
-  //   };
 
   const scrollOnMoreButton = () => {
     animateScroll.scrollToBottom({
@@ -78,7 +36,7 @@ const Tweets = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const newUsers = await getUsers(page);
-      console.log(newUsers);
+
       if (page === 1) {
         setUsers(newUsers);
         return;

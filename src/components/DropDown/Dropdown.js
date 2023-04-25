@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { filterValues } from 'utils/filterValues';
-
+import PropTypes from 'prop-types';
 const options = [
   filterValues.all,
   filterValues.follow,
@@ -16,4 +16,9 @@ export const SelectFilterUsers = ({ selectedOption, setSelectedOption }) => {
       options={options}
     />
   );
+};
+
+SelectFilterUsers.propTypes = {
+  selectedOption: PropTypes.object,
+  setSelectedOption: PropTypes.func,
 };

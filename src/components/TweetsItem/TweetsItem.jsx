@@ -11,10 +11,9 @@ import {
 } from './TweetsItem.styled';
 import logo from '../../images/Logo.png';
 import PulseLoader from 'react-spinners/PulseLoader';
+import PropTypes from 'prop-types';
 
-// import { updUser } from 'services/usepAPI';
 import { useState } from 'react';
-// import { getCardArrayFromLocalStorage } from 'utils/getCardArrLs';
 
 export const TweetsItem = ({ item, followings, isFollowing }) => {
   const { tweets, followers, user, avatar, id } = item;
@@ -59,3 +58,9 @@ export const TweetsItem = ({ item, followings, isFollowing }) => {
     </ListItem>
   );
 };
+
+TweetsItem.propTypes = {
+  item: PropTypes.object,
+  followings: PropTypes.array,
+  isFollowing: PropTypes.func,
+}
