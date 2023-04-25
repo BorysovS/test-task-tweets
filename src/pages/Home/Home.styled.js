@@ -49,3 +49,7 @@ export const GoLinkBtn = styled(Link)`
 export const BtnSpan = styled.span`
   margin-right: 8px;
 `;
+
+export const ImgWrapper = styled.div`
+  margin-right: 134px;
+`;

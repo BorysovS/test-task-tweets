@@ -6,12 +6,12 @@ import { Suspense } from 'react';
 export const Layout = () => {
   return (
     <>
-          <AppBar />
-          <main>
-          <Suspense fullback={null}>
-              <Outlet />
-              </Suspense>
-              </main>
+      <AppBar />
+      <main>
+        <Suspense fullback={null}>
+          <Outlet />
+        </Suspense>
+      </main>
       <GlobalStyle />
     </>
   );
