@@ -38,7 +38,7 @@ export const TweetsItem = ({ item, followings, isFollowing }) => {
           <Avatar src={avatar} alt={`${user} avatar`} />
         </ImgItemWrapper>
         <TextTweets>{tweets.toLocaleString('en-US')} tweets</TextTweets>
-        <TextFollower>{followers} followers</TextFollower>
+        <TextFollower>{followers.toLocaleString('en-US')} followers</TextFollower>
         <ItemBtn
           type="button"
           onClick={onFollowBtnClick}
