@@ -25,7 +25,6 @@ export const TweetsItem = ({ item, followings, isFollowing }) => {
     setIsLoading(true);
     await isFollowing(id, followers, subscription);
     setSubscription(pervState => !pervState);
-    console.log(followings);
     setIsLoading(false);
   };
 
